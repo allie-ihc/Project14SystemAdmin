@@ -1,0 +1,39 @@
+model:
+  name: ministry-rag-summarizer
+  version: "2.0.0"
+  registry_alias: "@champion"
+  base_model_id: "gpt-5.5"
+  base_model-retires: "12-11-2026"
+  task: "retrieval-augmented summarization of donor correspondence"
+  liscense: "internal-use-only"
+
+owner:
+  team: "platform-ai"
+  approver: "a.moldenhauer (human sign-off required before promotion)"
+  contact: "ai-governance@example.org"
+
+training_data:
+  datasheet_ref: "datasheets/donor-corpus-v4.md"
+  pli_class: "restricted"
+  provenance: "interal CRM export, 2024-01 to 2026-03, consented records only"
+  tdm_optout_respected: true
+
+evaluation:
+  eval_suite: "evals/summarizer_v2.jsonl"
+  groundedness: 0.90 # goal number
+  hallucination_rate: 0.05 # goal number
+  human-label_agreement: 0.91
+  gate_passed: true
+
+governance:
+  nist_rmf_function: "Manage"
+  eu_ai_act_tier: "limited-risk"
+  iso_42001_control: "A.6.2.4 system lifecycle"
+  aibom_ref: "aibom/ministry-rag-summarizer-2.0.0.cdx.json"
+  audit_log: "worm://logs/model-promotions/"
+
+lifecycle:
+  stage: "production"
+  promoted_on: "2026-08-08"
+  deprecation_notice: null
+  retire_after: null

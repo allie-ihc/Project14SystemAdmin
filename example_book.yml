@@ -1,0 +1,28 @@
+---
+- name: Verify Nginx installation and configuration
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Check if Nginx is installed
+      ansible.builtin.command: nginx -v
+      register: nginx_version
+      changed_when: false
+
+    - name: Display Nginx version
+      ansible.builtin.debug:
+        msg: "{{ nginx_version.stderr | default(nginx_version.stdout) }}"
+
+    - name: Check Nginx service status
+      ansible.builtin.systemd:
+        name: nginx
+      register: nginx_service
+
+    - name: Verify Nginx configuration file
+      ansible.builtin.command: nginx -t
+      register: nginx_config
+      changed_when: false
+
+    - name: Display Nginx configuration check result
+      ansible.builtin.debug:
+        msg: "{{ nginx_config.stderr | default(nginx_config.stdout) }}"
