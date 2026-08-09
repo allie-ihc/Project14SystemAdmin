@@ -1,0 +1,48 @@
+{
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.7",
+    "serialNumber": "urn:uuid:3e671687-395b-41f5-a30f-a58921a69b79",
+    "version": 1, 
+    "components": [
+        {
+            "bom-ref": "ministry-rag-summarizer",
+            "type": "machine-learning-model",
+            "publisher": "Grace Ministry",
+            "name": "RAG summarizer",
+            "version": "2.0.0",
+            "description": "retrieval-augmented summarization of donor correspondence"
+        },
+        {
+            "bom-ref": "ministry-rag-donor-dataset",
+            "type": "data",
+            "publisher": "Grace Ministry",
+            "name": "RAG donor dataset",
+            "version": "SNAPSHOT",
+            "data": [
+                {
+                    "type": "dataset",
+                    "contents": {
+                        "source": "./data/donors/correspondence"
+                    },
+                    "classification": "private"
+                }
+            ]
+        },
+        {
+            "bom-ref": "ministry-rag-base-model",
+            "type": "machine-learning-model",
+            "publisher": "OpenAI",
+            "name": "GPT 5.5",
+            "source": "https://openai.com/gpt-5.5",
+            "version": "5.5"
+        },
+        {
+            "bom-ref": "minisitry-rag-vector-db",
+            "type": "vector-database",
+            "publisher":"Grace Ministry",
+            "name": "ministry-rag-vectorDB",
+            "version": "2.0.0"
+        }
+
+    ]
+}

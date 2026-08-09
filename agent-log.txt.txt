@@ -1,0 +1,83 @@
+What the AI did:
+
+- Task delegated: Creating a priority ordering 
+- What I asked: Using (cve_feed.json), create a chart that ranks each advisory by priority and recommend a patch schedule that includes each advisory
+- What it did: Based on the provided data, we can rank the advisories by their CVSS (Common Vulnerability Scoring System) scores. A higher score indicates a more severe vulnerability.
+
+Here's how the advisories are ranked:
+
+1. CVE-2026-10122: 9.8
+2. CVE-2026-10733: 9.1
+3. CVE-2026-10477: 7.5
+4. CVE-2026-10588: 8.1 (Note: Although the CVSS score is higher than CVE-2026-10477, its "internet_facing" attribute is `false`, indicating it's not immediately exposed to internet threats. However, for the sake of ranking, I'll keep it at 4th position for now.)
+5. CVE-2026-10610: 4.3
+
+Based on these rankings and considering the "has_fix" attribute (i.e., whether a fix is available), here's a recommended patch schedule:
+
+**High Priority ( Immediate Patching Required)**
+
+1. CVE-2026-10122: Unauthenticated RCE in the reverse proxy fronting the inference API.
+2. CVE-2026-10733: Auth bypass in the model registry.
+
+These two advisories have CVSS scores above 9 and are critical, requiring immediate attention and patching to prevent potential exploitation.
+
+**Medium Priority (Patch as Soon as Possible)**
+
+1. CVE-2026-10477: DoS in the vector-DB query parser; crashes the pgvector backend.
+2. CVE-2026-10588: Privilege escalation in the GPU driver; no vendor fix yet, mitigation only.
+
+While these advisories have lower CVSS scores compared to the high-priority ones, they still pose a significant risk and should be patched as soon as possible.
+
+**Low Priority (Patch at Your Convenience)**
+
+1. CVE-2026-10610: Info leak in an internal logging library; low impact, behind the firewall.
+
+This advisory has a relatively low CVSS score (4.3) and is not exposed to internet threats, making it a lower priority for patching.
+
+Here's a sample chart to visualize this ranking:
+```
+| Advisory ID | CVSS Score | Priority |
+| --- | --- | --- |
+| CVE-2026-10122 | 9.8 | High |
+| CVE-2026-10733 | 9.1 | High |
+| CVE-2026-10588 | 8.1 | Medium |
+| CVE-2026-10477 | 7.5 | Medium |
+| CVE-2026-10610 | 4.3 | Low |
+```
+Note that the ranking may change based on your organization's specific risk tolerance, exposure to threats, and other factors. It's essential to review these advisories carefully and adjust the patch schedule according to your organization's needs.
+
+- Where it went wrong: Incorrectly prioritized 10588, which cannot be patched and can only be mitigated
+- What I changed: Reviewed and reflected on errors that AI made in writing
+
+- Task delegated: Producing small Ansible playbook
+- What I asked: Create a small ansible playbook for an ubunu server consisting of five tasks that checks if nginx is installed and verifies the configuration files for nginx
+- What the AI did: ---
+- name: Verify Nginx installation and configuration
+  hosts: localhost
+  become: true
+
+  tasks:
+    - name: Check if Nginx is installed
+      ansible.builtin.command: nginx -v
+      register: nginx_version
+      changed_when: false
+
+    - name: Display Nginx version
+      ansible.builtin.debug:
+        msg: "{{ nginx_version.stderr | default(nginx_version.stdout) }}"
+
+    - name: Check Nginx service status
+      ansible.builtin.systemd:
+        name: nginx
+      register: nginx_service
+
+    - name: Verify Nginx configuration file
+      ansible.builtin.command: nginx -t
+      register: nginx_config
+      changed_when: false
+
+    - name: Display Nginx configuration check result
+      ansible.builtin.debug:
+        msg: "{{ nginx_config.stderr | default(nginx_config.stdout) }}"
+- Where it went wrong: Code does not run properly on the server
+- What I changed: Edited host, attempted to debug but I ran out of time to solve the issues that were causing the code to not run properly

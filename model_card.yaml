@@ -36,4 +36,4 @@ lifecycle:
   stage: "production"
   promoted_on: "2026-08-08"
   deprecation_notice: null
-  retire_after: null
+  retire_after: "2026-12-11"

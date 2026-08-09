@@ -1,0 +1,39 @@
+{
+    "@graph": [
+        {
+            "type": "ministry-rag-summarizer",
+            "publisher": "Grace Ministry",
+            "name": "RAG summarizer",
+            "version": "2.0.0",
+            "description": "retrieval-augmented summarization of donor correspondence"
+        },
+        {
+            "type": "ministry-rag-donor-dataset",
+            "publisher": "Grace Ministry",
+            "name": "RAG donor dataset",
+            "version": "SNAPSHOT",
+            "data": [
+                {
+                    "type": "dataset",
+                    "contents": {
+                        "source": "./data/donors/correspondence"
+                    },
+                    "classification": "private"
+                }
+            ]
+        },
+        {
+            "type": "ministry-rag-base-model",
+            "publisher": "OpenAI",
+            "name": "GPT 5.5",
+            "source": "https://openai.com/gpt-5.5",
+            "version": "5.5"
+        },
+        {
+            "type": "ministry-rag-vector-db",
+            "publisher":"Grace Ministry",
+            "name": "ministry-rag-vectorDB",
+            "version": "2.0.0"
+        }
+    ]
+}

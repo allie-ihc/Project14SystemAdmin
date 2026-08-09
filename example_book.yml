@@ -1,3 +1,7 @@
+# I cannot get this to run correctly and I ran out of time to debug. I am sure that there is some sort
+# of AI hallucination or error that I could not catch. In theory, I would run this, change the configuration file and
+# then run it again to see the differences, but I was unable to with the time I had
+
 ---
 - name: Verify Nginx installation and configuration
   hosts: localhost
